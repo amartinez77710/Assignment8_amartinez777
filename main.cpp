@@ -78,7 +78,7 @@ class Electric_Field : public Field {
 		double epsilon_o = 8.854e-12;
 		double pi = 3.141;
 		E = Q/(4.0*pi*(R*R)*epsilon_o);
-		std::cout << "\nElectric Field Value: " << E << std::endl;
+		std::cout << "\nElectric Field Value: " << E << " N * m^2/C" << std::endl;
 	}
 };
 
@@ -113,7 +113,7 @@ class Magnetic_Field : public Field {
 		double pi = 3.141;
 		double mu = 4.0*pi*1e-7;
 		B = I/(2.0*pi*R*mu);
-		std::cout << "\nMagnetic Field Value: " << B << std::endl;
+		std::cout << "\nMagnetic Field Value: " <<  B << " T" << std::endl;
 	}
 };
 
@@ -132,29 +132,29 @@ int main(){
 	//ELECTRIC FIELD PRINT
 	std::cout << "\n--Electric Field 1--" << std::endl;
 	E1.printData();
-	E1.gaussLaw(1.6e-19, 0.5);
+	E1.gaussLaw(1.6e-19, 0.5); //1.6e-19 coulombs, 0.5 meters
 
 	std::cout << "\n\n--Electric Field 2--" << std::endl;
         E2.printData();
-	E2.gaussLaw(3.6e-19, 1);
+	E2.gaussLaw(3.6e-19, 1); //3.6e-19 coulombs, 1 meter
 
 	std::cout << "\n\n--Electric Field 3--" << std::endl;
 	E3.printData();
-	E3.gaussLaw(12e-19, 2);
+	E3.gaussLaw(12e-19, 2); //12e-19 coulombs, 2 meters
 	
 
 	//MAGNETIC FIELD PRINTING
 	std::cout << "\n--Magnetic Field 1--" << std::endl;
         B1.printData();
-        B1.ampereLaw(0.3, 0.5);
+        B1.ampereLaw(0.3, 0.5); //0.3 Amps, 0.5 meters
 
         std::cout << "\n\n--Magnetic Field 2--" << std::endl;
         B2.printData();
-        B2.ampereLaw(0.9, 1);
+        B2.ampereLaw(0.9, 1); //0.9 Amps, 1 meter
 
         std::cout << "\n\n--Magnetic Field 3--" << std::endl;
         B3.printData();
-        B3.ampereLaw(1, 2);
+        B3.ampereLaw(1, 2); //1 Amps, 2 meters
 	
 	return 0;
 }
