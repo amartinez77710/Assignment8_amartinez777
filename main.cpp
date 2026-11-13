@@ -37,6 +37,14 @@ class Field
 		magnitude = sqrt(getX()*getX() + getY()*getY() + getZ()*getZ());
 		std::cout << "Magnitude: " << magnitude;
 	}
+	
+	//extra magnitude function for the overload print
+	void magnitude(){
+		double magnitude;
+                magnitude = sqrt(getX()*getX() + getY()*getY() + getZ()*getZ());
+                std::cout << "Magnitude: " << magnitude;
+        }
+
 
 	//Destructor
 	~Field(){
@@ -70,6 +78,12 @@ class Electric_Field : public Field {
 	//OPERATOR so E3 = E1 + E2 is possible
 	Electric_Field operator+(const Electric_Field& other) const {
         	return Electric_Field(value[0] + other.value[0], value[1] + other.value[1], value[2] + other.value[2]);
+	}
+
+	// Overloaded << operator for Electric_Field
+	friend std::ostream& operator<<(std::ostream& os, const Electric_Field& ef) {
+        	os << "Components: (" << ef.value[0] << ", " << ef.value[1] << ", " << ef.value[2] << ")";
+        	return os;
 	}
 	
 	//Using Gauss's law equation, Q is charge, and R is radius
@@ -107,6 +121,12 @@ class Magnetic_Field : public Field {
 	Magnetic_Field operator+(const Magnetic_Field& other) const {
                 return Magnetic_Field(value[0] + other.value[0], value[1] + other.value[1], value[2] + other.value[2]);
         }
+
+	// Overloaded << operator for Magnetic_Field
+	friend std::ostream& operator<<(std::ostream& os, const Magnetic_Field& bf) {
+		os << "Components: (" << bf.value[0] << ", " << bf.value[1] << ", " << bf.value[2] << ")";
+		return os;
+    }
 	
 	//Function to print amperes law equation, I is current, R is radius
 	void ampereLaw(double I, double R){
@@ -139,7 +159,8 @@ int main(){
 	E2.gaussLaw(3.6e-19, 1); //3.6e-19 coulombs, 1 meter
 
 	std::cout << "\n\n--Electric Field 3--" << std::endl;
-	E3.printData();
+	std::cout << E3 << std::endl;
+	E3.magnitude();
 	E3.gaussLaw(12e-19, 2); //12e-19 coulombs, 2 meters
 	
 
@@ -153,7 +174,8 @@ int main(){
         B2.ampereLaw(0.9, 1); //0.9 Amps, 1 meter
 
         std::cout << "\n\n--Magnetic Field 3--" << std::endl;
-        B3.printData();
+	std::cout << B3 << std::endl;
+	B3.magnitude();
         B3.ampereLaw(1, 2); //1 Amps, 2 meters
 	
 	return 0;
